@@ -66,6 +66,8 @@
 	</section>
 	<section name="wizardPage">
 		<list key="groupId">
+			<item value="quanlyvefilm"/>
+			<item value="K22CNT3_VuHoaiNam_2210900050_prj3"/>
 			<item value="2210900050-VuHoaiNam"/>
 			<item value="demock"/>
 			<item value="demo5"/>
@@ -75,6 +77,8 @@
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="quanlyvefilm"/>
+			<item value="K22CNT3_VuHoaiNam_2210900050_prj3"/>
 			<item value="2210900050-VuHoaiNam"/>
 			<item value="demock"/>
 			<item value="demo5"/>

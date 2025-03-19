@@ -10,19 +10,21 @@
     <!-- ✅ Thêm Bootstrap CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    
 </head>
 <body>
 
-<%@ include file="layout/header.jsp" %>
+<%@ include file="/layout/header.jsp" %>
 
     <div class="container mt-4">
         <div class="jumbotron bg-primary text-white text-center py-5">
             <h1>Chào mừng đến với hệ thống đặt vé xem phim!</h1>
             <p>Đặt vé nhanh chóng, dễ dàng và tiện lợi.</p>
-            <a href="<c:url value='/movies' />" class="btn btn-warning btn-lg">Xem phim ngay</a>
+            <a href="${pageContext.request.contextPath}/movies" class="btn btn-warning btn-lg">Xem phim ngay</a>
+       
         </div>
-    </div>
-
     <div class="container mt-4">
     <h2 class="text-center mb-4">Phim Nổi Bật</h2>
     <div class="image-container">
@@ -34,7 +36,7 @@
 
 </div>
 
-<%@ include file="layout/foter.jsp" %>
+<%@ include file="/layout/foter.jsp" %>
 
 </body>
 </html>

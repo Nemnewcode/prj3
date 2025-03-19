@@ -11,7 +11,7 @@ import com.dao.MovieDao;
 import com.model.Movie;
 
 @Controller
-public class Homecontroller {
+public class HomeController {
 
     @Autowired
     private MovieDao movieDao;
@@ -22,9 +22,4 @@ public class Homecontroller {
         model.addAttribute("movies", movies);
         return "index";
     }
-
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "login"; 
     }
-}

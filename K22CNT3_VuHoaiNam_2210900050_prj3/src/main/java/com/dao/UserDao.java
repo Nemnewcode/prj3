@@ -1,32 +1,34 @@
 package com.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import com.model.User;
 
-public class UserDao {
-    private JdbcTemplate jdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+@Repository
+public class UserDao {
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public UserDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // Thêm user
-    public int saveUser(User user) {
-        String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-        return jdbcTemplate.update(sql, user.getUsername(), user.getPassword());
+    // Đăng ký tài khoản (Chỉ có thể đăng ký với vai trò CUSTOMER)
+    public int registerUser(String username, String password, String email, String phone) {
+        String sql = "INSERT INTO users (username, password, email, phone, role) VALUES (?, ?, ?, ?, 'CUSTOMER')";
+        return jdbcTemplate.update(sql, username, password, email, phone);
     }
 
-    // Lấy danh sách user
-    public List<User> getAllUsers() {
-        return jdbcTemplate.query("SELECT * FROM users", new RowMapper<User>() {
-            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"));
-            }
-        });
+    // Đăng nhập và kiểm tra quyền
+    public User loginUser(String username, String password) {
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username, password);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
